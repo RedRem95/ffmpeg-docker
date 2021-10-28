@@ -18,6 +18,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
+    - name: Create image name
+      id: CIN
+      run: echo ::set-output name=image_name::$(echo ${REPO_NAME}/${IMAGE_NAME} | tr '[:upper:]' '[:lower:]')
+      
     - uses: actions/checkout@v2
     
     - name: Log in to the Container registry
@@ -30,7 +35,7 @@ jobs:
     - name: Build and Push 10.02-18.04
       uses: mr-smithers-excellent/docker-build-push@v5.6
       with:
-        image: ${REPO_NAME,,}/${IMAGE_NAME}
+        image: ${{ steps.CIN.outputs.image_name }}
         tags: cuda-${CUDA_VERSION}-ubuntu-${UBUNTU_VERSION}
         registry: ${REGISTRY}
         dockerfile: Dockerfile
@@ -45,7 +50,7 @@ jobs:
     - name: Build and Push 11.4.1-18.04
       uses: mr-smithers-excellent/docker-build-push@v5.6
       with:
-        image: ${REPO_NAME,,}/${IMAGE_NAME,,}
+        image: ${{ steps.CIN.outputs.image_name }}
         tags: cuda-${CUDA_VERSION}-UBUNTU-${UBUNTU_VERSION}
         registry: ${REGISTRY}
         dockerfile: Dockerfile
