@@ -47,6 +47,9 @@ jobs:
         CUDA_VERSION: 10.2
         UBUNTU_VERSION: 18.04
         
+    - name: Clean images
+      run: docker image prune -a
+        
     - name: Build and Push 11.4.2-18.04
       uses: mr-smithers-excellent/docker-build-push@v5.6
       with:
@@ -61,6 +64,9 @@ jobs:
       env:
         CUDA_VERSION: 11.4.2
         UBUNTU_VERSION: 18.04
+        
+    - name: Clean images
+      run: docker image prune -a
         
     - name: Build and Push 11.4.2-20.04
       uses: mr-smithers-excellent/docker-build-push@v5.6
@@ -92,6 +98,9 @@ jobs:
         CUDA_VERSION: 11.2.2
         UBUNTU_VERSION: 18.04
         
+    - name: Clean images
+      run: docker image prune -a
+        
     - name: Build and Push 11.2.2-20.04
       uses: mr-smithers-excellent/docker-build-push@v5.6
       with:
@@ -106,6 +115,9 @@ jobs:
       env:
         CUDA_VERSION: 11.2.2
         UBUNTU_VERSION: 20.04
+        
+    - name: Clean images
+      run: docker image prune -a
         
     - name: Build and Push 11.2.0-18.04
       uses: mr-smithers-excellent/docker-build-push@v5.6
@@ -122,6 +134,9 @@ jobs:
         CUDA_VERSION: 11.2.0
         UBUNTU_VERSION: 18.04
         
+    - name: Clean images
+      run: docker image prune -a
+        
     - name: Build and Push 11.2.0-20.04
       uses: mr-smithers-excellent/docker-build-push@v5.6
       with:
@@ -136,6 +151,9 @@ jobs:
       env:
         CUDA_VERSION: 11.2.0
         UBUNTU_VERSION: 20.04
+        
+    - name: Clean images
+      run: docker image prune -a
         
     - name: Build and Push 11.3.1-18.04
       uses: mr-smithers-excellent/docker-build-push@v5.6
@@ -152,6 +170,9 @@ jobs:
         CUDA_VERSION: 11.3.1
         UBUNTU_VERSION: 18.04
         
+    - name: Clean images
+      run: docker image prune -a
+        
     - name: Build and Push 11.3.1-20.04
       uses: mr-smithers-excellent/docker-build-push@v5.6
       with:
@@ -166,4 +187,8 @@ jobs:
       env:
         CUDA_VERSION: 11.3.1
         UBUNTU_VERSION: 20.04
+        
+    - name: Clean images
+      run: docker image prune -a
+      
         
