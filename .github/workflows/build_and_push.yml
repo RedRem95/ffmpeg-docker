@@ -9,6 +9,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ffmpeg
+  REPO_NAME: ${{ github.actor }}
 
 jobs:
 
@@ -29,8 +30,8 @@ jobs:
     - name: Build and Push 10.02-18.04
       uses: mr-smithers-excellent/docker-build-push@v5.6
       with:
-        image: ${{ github.actor }}/${IMAGE_NAME}
-        tags: CUDA-${CUDA_VERSION}-UBUNTU-${UBUNTU_VERSION}
+        image: ${REPO_NAME,,}/${IMAGE_NAME}
+        tags: cuda-${CUDA_VERSION}-ubuntu-${UBUNTU_VERSION}
         registry: ${REGISTRY}
         dockerfile: Dockerfile
         directory: .
@@ -44,8 +45,8 @@ jobs:
     - name: Build and Push 11.4.1-18.04
       uses: mr-smithers-excellent/docker-build-push@v5.6
       with:
-        image: ${{ github.actor }}/${IMAGE_NAME}
-        tags: CUDA-${CUDA_VERSION}-UBUNTU-${UBUNTU_VERSION}
+        image: ${REPO_NAME,,}/${IMAGE_NAME,,}
+        tags: cuda-${CUDA_VERSION}-UBUNTU-${UBUNTU_VERSION}
         registry: ${REGISTRY}
         dockerfile: Dockerfile
         directory: .
