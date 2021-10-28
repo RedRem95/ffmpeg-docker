@@ -1,21 +1,24 @@
-FROM nvidia/cuda:10.2-devel-ubuntu18.04
+ARG CUDA_VERSION=10.2
+ARG UBUNTU_VERSION=18.04
+
+FROM nvidia/cuda:${CUDA_VERSION}-devel-ubuntu${UBUNTU_VERSION} AS BUILDER
 
 ARG BUILD_CORES=4
 
-RUN apt-get update && apt-get upgrade -y \
-    && DEBIAN_FRONTEND=noninteractive  apt-get -y install \
+RUN apt update && apt upgrade -y \
+    && DEBIAN_FRONTEND=noninteractive  apt -y install \
                       autoconf automake build-essential cmake git-core libass-dev \
                       libfreetype6-dev libgnutls28-dev libmp3lame-dev libsdl2-dev \
                       libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev \
                       libxcb-shm0-dev libxcb-xfixes0-dev ninja-build wget \
                       pkg-config texinfo yasm zlib1g-dev libunistring-dev \
-                      # libaom-dev \
                       python3-pip \
                       libx264-dev libx265-dev libnuma-dev libvpx-dev libfdk-aac-dev \
                       libopus-dev \
                       build-essential yasm cmake libtool libc6 libc6-dev unzip wget \
                       libnuma1 libnuma-dev \
-    && apt-get autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && DEBIAN_FRONTEND=noninteractive apt -y install libaom-dev || echo "libaom not needed" \
+    && apt autoremove && apt clean && rm -rf /var/lib/apt/lists/*
     
 RUN pip3 install meson
 
@@ -81,7 +84,7 @@ RUN cd ~/ffmpeg_sources && \
 ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES video,compute,utility
 
-RUN ln -s $HOME/bin/ffmpeg /bin/ffmpeg && \
-    ln -s $HOME/bin/ffplay /bin/ffplay && \
-    ln -s $HOME/bin/ffprobe /bin/ffprobe
+RUN mv $HOME/bin/ffmpeg /bin/ffmpeg && \
+    mv $HOME/bin/ffplay /bin/ffplay && \
+    mv $HOME/bin/ffprobe /bin/ffprobe
 RUN ls -al ~/bin && ffmpeg -version
