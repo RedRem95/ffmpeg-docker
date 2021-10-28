@@ -44,7 +44,7 @@ jobs:
         addLatest: false
         addTimestamp: false
       env:
-        CUDA_VERSION: 10.02
+        CUDA_VERSION: 10.2
         UBUNTU_VERSION: 18.04
         
     - name: Build and Push 11.4.1-18.04
