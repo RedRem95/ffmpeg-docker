@@ -1,0 +1,62 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+    
+  workflow_dispatch:
+    
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ffmpeg
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Log in to the Container registry
+      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Build and Push 10.02-18.04
+      uses: mr-smithers-excellent/docker-build-push@v5.6
+      with:
+        image: ${{ github.actor }}/${{ IMAGE_NAME }}
+        tags: CUDA-${CUDA_VERSION}-UBUNTU-${UBUNTU_VERSION}
+        registry: ${{ REGISTRY }}
+        dockerfile: Dockerfile
+        directory: .
+        buildArgs: 
+          - CUDA_VERSION=${CUDA_VERSION}
+          - UBUNTU_VERSION=${UBUNTU_VERSION}
+        addLatest: false
+        addTimestamp: false
+      env:
+        CUDA_VERSION: 10.02
+        UBUNTU_VERSION: 18.04
+        
+    - name: Build and Push 11.4.1-18.04
+      uses: mr-smithers-excellent/docker-build-push@v5.6
+      with:
+        image: ${{ github.actor }}/${{ IMAGE_NAME }}
+        tags: CUDA-${CUDA_VERSION}-UBUNTU-${UBUNTU_VERSION}
+        registry: ${{ REGISTRY }}
+        dockerfile: Dockerfile
+        directory: .
+        buildArgs: 
+          - CUDA_VERSION=${CUDA_VERSION}
+          - UBUNTU_VERSION=${UBUNTU_VERSION}
+        addLatest: false
+        addTimestamp: false
+      env:
+        CUDA_VERSION: 11.4.1
+        UBUNTU_VERSION: 18.04
+        
