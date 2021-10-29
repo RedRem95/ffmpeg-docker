@@ -3,6 +3,9 @@ ARG UBUNTU_VERSION=18.04
 
 FROM nvidia/cuda:${CUDA_VERSION}-devel-ubuntu${UBUNTU_VERSION} AS BUILDER
 
+LABEL org.opencontainers.image.description "Snapshot FFMPEG Release with added nvidia headers"
+LABEL maintainer "https://github.com/RedRem95/ffmpeg-docker"
+
 ARG BUILD_CORES=4
 
 RUN apt update && apt upgrade -y \
