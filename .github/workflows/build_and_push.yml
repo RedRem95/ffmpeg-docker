@@ -1,0 +1,194 @@
+name: Build and Push Images
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+    
+  workflow_dispatch:
+    
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ffmpeg
+  REPO_NAME: ${{ github.actor }}
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - name: Create image name
+      id: CIN
+      run: echo ::set-output name=image_name::$(echo ${REPO_NAME}/${IMAGE_NAME} | tr '[:upper:]' '[:lower:]')
+      
+    - uses: actions/checkout@v2
+    
+    - name: Log in to the Container registry
+      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Build and Push 10.02-18.04
+      uses: mr-smithers-excellent/docker-build-push@v5.6
+      with:
+        image: ${{ steps.CIN.outputs.image_name }}
+        tags: cuda-${CUDA_VERSION}-ubuntu-${UBUNTU_VERSION}
+        registry: ${REGISTRY}
+        dockerfile: Dockerfile
+        directory: .
+        buildArgs: CUDA_VERSION=${CUDA_VERSION}, UBUNTU_VERSION=${UBUNTU_VERSION}
+        addLatest: false
+        addTimestamp: false
+      env:
+        CUDA_VERSION: 10.2
+        UBUNTU_VERSION: 18.04
+        
+    - name: Clean images
+      run: docker image prune -a -f
+        
+    - name: Build and Push 11.4.2-18.04
+      uses: mr-smithers-excellent/docker-build-push@v5.6
+      with:
+        image: ${{ steps.CIN.outputs.image_name }}
+        tags: cuda-${CUDA_VERSION}-ubuntu-${UBUNTU_VERSION}
+        registry: ${REGISTRY}
+        dockerfile: Dockerfile
+        directory: .
+        buildArgs: CUDA_VERSION=${CUDA_VERSION}, UBUNTU_VERSION=${UBUNTU_VERSION}
+        addLatest: false
+        addTimestamp: false
+      env:
+        CUDA_VERSION: 11.4.2
+        UBUNTU_VERSION: 18.04
+        
+    - name: Clean images
+      run: docker image prune -a -f
+        
+    - name: Build and Push 11.4.2-20.04
+      uses: mr-smithers-excellent/docker-build-push@v5.6
+      with:
+        image: ${{ steps.CIN.outputs.image_name }}
+        tags: cuda-${CUDA_VERSION}-ubuntu-${UBUNTU_VERSION}
+        registry: ${REGISTRY}
+        dockerfile: Dockerfile
+        directory: .
+        buildArgs: CUDA_VERSION=${CUDA_VERSION}, UBUNTU_VERSION=${UBUNTU_VERSION}
+        addLatest: false
+        addTimestamp: false
+      env:
+        CUDA_VERSION: 11.4.2
+        UBUNTU_VERSION: 20.04
+        
+    - name: Build and Push 11.2.2-18.04
+      uses: mr-smithers-excellent/docker-build-push@v5.6
+      with:
+        image: ${{ steps.CIN.outputs.image_name }}
+        tags: cuda-${CUDA_VERSION}-ubuntu-${UBUNTU_VERSION}
+        registry: ${REGISTRY}
+        dockerfile: Dockerfile
+        directory: .
+        buildArgs: CUDA_VERSION=${CUDA_VERSION}, UBUNTU_VERSION=${UBUNTU_VERSION}
+        addLatest: false
+        addTimestamp: false
+      env:
+        CUDA_VERSION: 11.2.2
+        UBUNTU_VERSION: 18.04
+        
+    - name: Clean images
+      run: docker image prune -a -f
+        
+    - name: Build and Push 11.2.2-20.04
+      uses: mr-smithers-excellent/docker-build-push@v5.6
+      with:
+        image: ${{ steps.CIN.outputs.image_name }}
+        tags: cuda-${CUDA_VERSION}-ubuntu-${UBUNTU_VERSION}
+        registry: ${REGISTRY}
+        dockerfile: Dockerfile
+        directory: .
+        buildArgs: CUDA_VERSION=${CUDA_VERSION}, UBUNTU_VERSION=${UBUNTU_VERSION}
+        addLatest: false
+        addTimestamp: false
+      env:
+        CUDA_VERSION: 11.2.2
+        UBUNTU_VERSION: 20.04
+        
+    - name: Clean images
+      run: docker image prune -a -f
+        
+    - name: Build and Push 11.2.0-18.04
+      uses: mr-smithers-excellent/docker-build-push@v5.6
+      with:
+        image: ${{ steps.CIN.outputs.image_name }}
+        tags: cuda-${CUDA_VERSION}-ubuntu-${UBUNTU_VERSION}
+        registry: ${REGISTRY}
+        dockerfile: Dockerfile
+        directory: .
+        buildArgs: CUDA_VERSION=${CUDA_VERSION}, UBUNTU_VERSION=${UBUNTU_VERSION}
+        addLatest: false
+        addTimestamp: false
+      env:
+        CUDA_VERSION: 11.2.0
+        UBUNTU_VERSION: 18.04
+        
+    - name: Clean images
+      run: docker image prune -a -f 
+        
+    - name: Build and Push 11.2.0-20.04
+      uses: mr-smithers-excellent/docker-build-push@v5.6
+      with:
+        image: ${{ steps.CIN.outputs.image_name }}
+        tags: cuda-${CUDA_VERSION}-ubuntu-${UBUNTU_VERSION}
+        registry: ${REGISTRY}
+        dockerfile: Dockerfile
+        directory: .
+        buildArgs: CUDA_VERSION=${CUDA_VERSION}, UBUNTU_VERSION=${UBUNTU_VERSION}
+        addLatest: false
+        addTimestamp: false
+      env:
+        CUDA_VERSION: 11.2.0
+        UBUNTU_VERSION: 20.04
+        
+    - name: Clean images
+      run: docker image prune -a -f
+        
+    - name: Build and Push 11.3.1-18.04
+      uses: mr-smithers-excellent/docker-build-push@v5.6
+      with:
+        image: ${{ steps.CIN.outputs.image_name }}
+        tags: cuda-${CUDA_VERSION}-ubuntu-${UBUNTU_VERSION}
+        registry: ${REGISTRY}
+        dockerfile: Dockerfile
+        directory: .
+        buildArgs: CUDA_VERSION=${CUDA_VERSION}, UBUNTU_VERSION=${UBUNTU_VERSION}
+        addLatest: false
+        addTimestamp: false
+      env:
+        CUDA_VERSION: 11.3.1
+        UBUNTU_VERSION: 18.04
+        
+    - name: Clean images
+      run: docker image prune -a -f
+        
+    - name: Build and Push 11.3.1-20.04
+      uses: mr-smithers-excellent/docker-build-push@v5.6
+      with:
+        image: ${{ steps.CIN.outputs.image_name }}
+        tags: cuda-${CUDA_VERSION}-ubuntu-${UBUNTU_VERSION}
+        registry: ${REGISTRY}
+        dockerfile: Dockerfile
+        directory: .
+        buildArgs: CUDA_VERSION=${CUDA_VERSION}, UBUNTU_VERSION=${UBUNTU_VERSION}
+        addLatest: false
+        addTimestamp: false
+      env:
+        CUDA_VERSION: 11.3.1
+        UBUNTU_VERSION: 20.04
+        
+    - name: Clean images
+      run: docker image prune -a -f
+      
+        
