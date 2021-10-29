@@ -48,7 +48,7 @@ jobs:
         UBUNTU_VERSION: 18.04
         
     - name: Clean images
-      run: docker image prune -a
+      run: docker image prune -a -f
         
     - name: Build and Push 11.4.2-18.04
       uses: mr-smithers-excellent/docker-build-push@v5.6
@@ -66,7 +66,7 @@ jobs:
         UBUNTU_VERSION: 18.04
         
     - name: Clean images
-      run: docker image prune -a
+      run: docker image prune -a -f
         
     - name: Build and Push 11.4.2-20.04
       uses: mr-smithers-excellent/docker-build-push@v5.6
@@ -99,7 +99,7 @@ jobs:
         UBUNTU_VERSION: 18.04
         
     - name: Clean images
-      run: docker image prune -a
+      run: docker image prune -a -f
         
     - name: Build and Push 11.2.2-20.04
       uses: mr-smithers-excellent/docker-build-push@v5.6
@@ -117,7 +117,7 @@ jobs:
         UBUNTU_VERSION: 20.04
         
     - name: Clean images
-      run: docker image prune -a
+      run: docker image prune -a -f
         
     - name: Build and Push 11.2.0-18.04
       uses: mr-smithers-excellent/docker-build-push@v5.6
@@ -135,7 +135,7 @@ jobs:
         UBUNTU_VERSION: 18.04
         
     - name: Clean images
-      run: docker image prune -a
+      run: docker image prune -a -f 
         
     - name: Build and Push 11.2.0-20.04
       uses: mr-smithers-excellent/docker-build-push@v5.6
@@ -153,7 +153,7 @@ jobs:
         UBUNTU_VERSION: 20.04
         
     - name: Clean images
-      run: docker image prune -a
+      run: docker image prune -a -f
         
     - name: Build and Push 11.3.1-18.04
       uses: mr-smithers-excellent/docker-build-push@v5.6
@@ -171,7 +171,7 @@ jobs:
         UBUNTU_VERSION: 18.04
         
     - name: Clean images
-      run: docker image prune -a
+      run: docker image prune -a -f
         
     - name: Build and Push 11.3.1-20.04
       uses: mr-smithers-excellent/docker-build-push@v5.6
@@ -189,6 +189,6 @@ jobs:
         UBUNTU_VERSION: 20.04
         
     - name: Clean images
-      run: docker image prune -a
+      run: docker image prune -a -f
       
         
